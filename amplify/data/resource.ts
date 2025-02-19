@@ -8,23 +8,17 @@ specifies that any user authenticated via an API key can "create", "read",
 =========================================================================*/
 
 const schema = a.schema({
-  Task: a
-    .model({
-      id: a.id(),
-      name: a.string(),
-      description: a.string(),
-      color: a.string(),
-      startHour: a.string(),
-      endHour: a.string(),
-      routineId: a.string(),
-      routine: a.belongsTo("Routine", "routineId"),
-    })
-    .authorization((allow) => [allow.publicApiKey()]),
+  Task: a.customType({
+    name: a.string(),
+    color: a.string(),
+    startHour: a.string(),
+    endHour: a.string(),
+  }),
 
   Routine: a
     .model({
       id: a.id(),
-      routines: a.hasMany("Task", "routineId"),
+      tasks: a.ref("Task").array(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
 });

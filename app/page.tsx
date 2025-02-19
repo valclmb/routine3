@@ -5,8 +5,6 @@ import { RoutineProvider } from "@/contexts/RoutineContext";
 
 // Amplify.configure(outputs);
 
-// const client = generateClient<Schema>();
-
 export default function App() {
   // const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
 
@@ -22,12 +20,6 @@ export default function App() {
 
   // function deleteTodo(id: string) {
   //   client.models.Todo.delete({ id });
-  // }
-
-  // function createTodo() {
-  //   client.models.Todo.create({
-  //     content: window.prompt("Todo content"),
-  //   });
   // }
 
   // const { signOut } = useAuthenticator();

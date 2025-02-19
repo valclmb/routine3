@@ -1,3 +1,5 @@
+import { Schema } from "@/amplify/data/resource";
+import { generateClient } from "@aws-amplify/api";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Routine, TimeSlot } from "../components/routine/Routine";
@@ -9,6 +11,12 @@ export type UseRoutineReturn = {
   saveRoutine: () => void;
 };
 
+// function createTodo() {
+//   client.models.Todo.create({
+//     content: window.prompt("Todo content"),
+//   });
+// }
+const client = generateClient<Schema>();
 export const useRoutine = (): UseRoutineReturn => {
   const [routine, setRoutine] = useState<Routine>([]);
 
@@ -25,8 +33,12 @@ export const useRoutine = (): UseRoutineReturn => {
     setRoutine(routine.filter((t) => t.id !== id));
   };
 
-  const saveRoutine = () => {
-    localStorage.setItem("routine", JSON.stringify(routine));
+  const saveRoutine = async () => {
+    console.log(routine);
+    // localStorage.setItem("routine", JSON.stringify(routine));
+    const newRoutine = await client.models.Routine.create({
+      id: "1",
+    });
 
     toast("Routine enregistrée", {
       duration: 2000,

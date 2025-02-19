@@ -14,6 +14,7 @@ import { TaskForm } from "./TaskForm";
 
 export const TaskList = () => {
   const { routine, removeTask, saveRoutine } = useContext(RoutineContext);
+
   return (
     <div className="flex flex-col gap-2">
       {routine.map((timeSlot: TimeSlot) => (
