@@ -10,17 +10,21 @@ specifies that any user authenticated via an API key can "create", "read",
 const schema = a.schema({
   Task: a
     .model({
+      id: a.id(),
       name: a.string(),
       description: a.string(),
       color: a.string(),
       startHour: a.string(),
       endHour: a.string(),
+      routineId: a.string(),
+      routine: a.belongsTo("Routine", "routineId"),
     })
     .authorization((allow) => [allow.publicApiKey()]),
 
   Routine: a
     .model({
-      routines: a.hasMany("Task", "Routine"),
+      id: a.id(),
+      routines: a.hasMany("Task", "routineId"),
     })
     .authorization((allow) => [allow.publicApiKey()]),
 });
