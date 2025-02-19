@@ -6,10 +6,19 @@ adding a new "isDone" field as a boolean. The authorization rule below
 specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
+
 const schema = a.schema({
-  Todo: a
+  Task: a.model({
+    name: a.string(),
+    description: a.string(),
+    color: a.string(),
+    startHour: a.string(),
+    endHour: a.string(),
+  }),
+
+  Routine: a
     .model({
-      content: a.string(),
+      routines: a.hasMany("Task", "Routine"),
     })
     .authorization((allow) => [allow.publicApiKey()]),
 });
