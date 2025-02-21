@@ -38,7 +38,9 @@ export const useAuth = (): UseAuthReturn => {
     signOut().then(() => {
       setUser(null);
       setIsAuthenticated(false);
-      window.location.reload();
+      // if (typeof window !== "undefined") {
+      //   window.location.reload();
+      // }
     });
   };
 

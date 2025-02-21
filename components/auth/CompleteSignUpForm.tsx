@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { confirmSignUp } from "aws-amplify/auth";
 import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -21,10 +21,13 @@ export const CompleteSignUpForm = () => {
   const { username } = useContext(SignupContext);
   const router = useRouter();
 
+  useEffect(() => {
+    if (!username && typeof window !== "undefined") {
+      router.back();
+    }
+  }, [username, router]);
+
   console.log(username);
-  if (!username) {
-    router.back();
-  }
 
   const form = useForm({
     resolver: zodResolver(completeStepSchema),
