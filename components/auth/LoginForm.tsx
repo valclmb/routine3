@@ -1,10 +1,8 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Amplify } from "aws-amplify";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import outputs from "../../amplify_outputs.json";
 
 import { AuthContext } from "@/contexts/AuthContext";
 import { signInWithRedirect } from "aws-amplify/auth";
@@ -13,7 +11,7 @@ import { useContext } from "react";
 import { Button } from "../ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
 import { Input } from "../ui/input";
-Amplify.configure(outputs);
+// Amplify.configure(outputs);
 
 const formSchema = z.object({
   username: z.string().email(),
