@@ -14,7 +14,7 @@ import { useContext } from "react";
 
 export const Nav = () => {
   const { user, handleSignOut } = useContext(AuthContext);
-  console.log(user);
+
   return (
     <Authenticator.Provider>
       <nav className="flex items-center justify-between p-3 mb-10">

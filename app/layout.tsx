@@ -24,18 +24,16 @@ const geistMono = Geist_Mono({
 // };
 Amplify.configure(outputs);
 
-export default function RootLayout(props: {
-  auth: React.ReactNode;
+export default function RootLayout({
+  children,
+}: {
   children: React.ReactNode;
 }) {
   return (
     <html lang="fr">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <AuthProvider>
-          <div className="w-5/6 mx-auto">
-            {props.children}
-            {props.auth}
-          </div>
+          <div className="w-5/6 mx-auto">{children}</div>
           <Toaster />
         </AuthProvider>
       </body>

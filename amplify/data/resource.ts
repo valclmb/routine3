@@ -18,7 +18,7 @@ const schema = a.schema({
 
   Routine: a
     .model({
-      userId: a.id(),
+      // userId: a.id(),
       id: a.id(),
       tasks: a.ref("Task").array(),
     })

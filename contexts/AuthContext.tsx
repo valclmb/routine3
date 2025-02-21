@@ -10,7 +10,6 @@ export const AuthContext = createContext<UseAuthReturn>({
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const authUtils = useAuth();
-  console.log(authUtils);
 
   return (
     <AuthContext.Provider value={authUtils}>

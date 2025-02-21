@@ -1,9 +1,9 @@
-import { LoginForm } from "@/components/auth/LoginForm";
+import { SignupForm } from "@/components/auth/SignupForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { LoaderCircle } from "lucide-react";
 
-export default function Login() {
+export default function Signup() {
   return (
     <div className="flex flex-col gap-8 min-h-screen items-center justify-center">
       <h1 className="text-4xl font-bold flex items-center gap-2">
@@ -12,10 +12,10 @@ export default function Login() {
       </h1>
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center text-2xl font-bold">
-          <CardTitle>Connexion</CardTitle>
+          <CardTitle>Créer un compte</CardTitle>
         </CardHeader>
         <CardContent>
-          <LoginForm />
+          <SignupForm />
         </CardContent>
       </Card>
     </div>

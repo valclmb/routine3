@@ -58,7 +58,7 @@ export const useRoutine = (): UseRoutineReturn => {
       } else {
         // Créer une nouvelle routine si aucune n'existe
         await client.models.Routine.create({
-          userId: user?.userId,
+          // userId: user?.userId,
           tasks: routine,
         });
       }
@@ -69,7 +69,6 @@ export const useRoutine = (): UseRoutineReturn => {
         description: "Votre routine a été enregistrée avec succès",
       });
     } catch (err) {
-      console.log(err);
       toast("Une erreur est survenue", {
         duration: 2000,
         icon: "❌",
