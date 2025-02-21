@@ -5,13 +5,16 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { AuthContext } from "@/contexts/AuthContext";
+import { Amplify } from "aws-amplify";
 import { signInWithRedirect } from "aws-amplify/auth";
 import Image from "next/image";
+import Link from "next/link";
 import { useContext } from "react";
+import outputs from "../../amplify_outputs.json";
 import { Button } from "../ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
 import { Input } from "../ui/input";
-// Amplify.configure(outputs);
+Amplify.configure(outputs);
 
 const formSchema = z.object({
   username: z.string().email(),
@@ -85,6 +88,12 @@ export const LoginForm = () => {
           <Image src="/google.png" alt="google logo" width={20} height={20} />
           Se connecter avec Google
         </Button>
+        <p className="text-center text-sm text-muted-foreground">
+          Pas encore de compte ?{" "}
+          <Link href="/signup" className="text-primary hover:underline">
+            Créer un compte
+          </Link>
+        </p>
       </form>
     </Form>
   );

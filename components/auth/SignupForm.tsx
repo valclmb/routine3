@@ -5,18 +5,27 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 // import outputs from "../../amplify_outputs.json";
 
+import { SignupContext } from "@/contexts/SignupContext";
+import { Amplify } from "aws-amplify";
 import { signUp } from "aws-amplify/auth";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
 import { toast } from "sonner";
+import outputs from "../../amplify_outputs.json";
 import { Button } from "../ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
 import { Input } from "../ui/input";
-// Amplify.configure(outputs);
+Amplify.configure(outputs);
 
 const formSchema = z.object({
   username: z.string().email(),
   password: z.string().min(8),
 });
+
 export const SignupForm = () => {
+  const { setUsername } = useContext(SignupContext);
+  const router = useRouter();
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -25,10 +34,13 @@ export const SignupForm = () => {
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    const test = signUp(data)
+  const onSubmit = (data: z.infer<typeof formSchema>) => {
+    signUp(data)
       .then((res) => {
-        console.log(res);
+        if (!res.isSignUpComplete) {
+          setUsername(data.username);
+          router.push(`/signup/complete `);
+        }
       })
       .catch((err) => {
         toast.error(err.message);
@@ -69,6 +81,12 @@ export const SignupForm = () => {
         <Button type="submit" className="w-full">
           Créer un compte
         </Button>
+        <p className="text-center text-sm text-muted-foreground">
+          Déjà un compte ?{" "}
+          <Link href="/login" className="text-primary hover:underline">
+            Se connecter
+          </Link>
+        </p>
       </form>
     </Form>
   );

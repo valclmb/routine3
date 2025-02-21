@@ -24,11 +24,15 @@ export const useRoutine = (): UseRoutineReturn => {
       return;
     }
 
-    client.models.Routine.list().then((res) => {
-      if (res.data[0]?.tasks) {
-        setRoutine(res.data[0].tasks as TimeSlot[]);
-      }
-    });
+    client.models.Routine.list()
+      .then((res) => {
+        if (res.data[0]?.tasks) {
+          setRoutine(res.data[0].tasks as TimeSlot[]);
+        }
+      })
+      .catch((err) => {
+        setRoutine([]);
+      });
   };
 
   useEffect(() => {
@@ -69,6 +73,7 @@ export const useRoutine = (): UseRoutineReturn => {
         description: "Votre routine a été enregistrée avec succès",
       });
     } catch (err) {
+      console.log(err);
       toast("Une erreur est survenue", {
         duration: 2000,
         icon: "❌",
