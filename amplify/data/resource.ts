@@ -9,18 +9,21 @@ specifies that any user authenticated via an API key can "create", "read",
 
 const schema = a.schema({
   Task: a.customType({
+    id: a.string(),
     name: a.string(),
     color: a.string(),
-    startHour: a.string(),
-    endHour: a.string(),
+    start: a.string(),
+    end: a.string(),
   }),
 
   Routine: a
     .model({
+      userId: a.id(),
       id: a.id(),
       tasks: a.ref("Task").array(),
     })
-    .authorization((allow) => [allow.publicApiKey()]),
+    .identifier(["id"])
+    .authorization((allow) => allow.ownersDefinedIn("userId")),
 });
 
 export type Schema = ClientSchema<typeof schema>;
@@ -28,7 +31,7 @@ export type Schema = ClientSchema<typeof schema>;
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: "apiKey",
+    defaultAuthorizationMode: "userPool",
     apiKeyAuthorizationMode: {
       expiresInDays: 30,
     },

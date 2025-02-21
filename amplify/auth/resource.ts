@@ -13,8 +13,14 @@ export const auth = defineAuth({
         clientSecret: secret("GOOGLE_CLIENT_SECRET"),
         scopes: ["email", "profile"],
       },
-      callbackUrls: ["https://main.detyk194gu095.amplifyapp.com"],
-      logoutUrls: ["https://main.detyk194gu095.amplifyapp.com"],
+      callbackUrls: [
+        "https://main.detyk194gu095.amplifyapp.com",
+        "http://localhost:3000",
+      ],
+      logoutUrls: [
+        "https://main.detyk194gu095.amplifyapp.com",
+        "http://localhost:3000",
+      ],
     },
   },
 });
